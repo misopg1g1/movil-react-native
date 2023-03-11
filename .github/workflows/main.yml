@@ -1,8 +1,7 @@
-name: Ejecutar Pruebas de Jest
-
+name: Main
 on:
   pull_request:
-
+    types: [opened, synchronize, reopened]
 jobs:
   build:
     runs-on: macos-latest
