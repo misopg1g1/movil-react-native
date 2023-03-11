@@ -1,0 +1,14 @@
+name: Ejecutar Pruebas de Jest
+
+on:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Dependencies
+        run: npm install
+      - name: Run Jest
+        run: npm test
