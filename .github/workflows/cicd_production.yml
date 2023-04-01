@@ -1,0 +1,30 @@
+name: CICD
+
+on:
+  push:
+    branches:
+      - production
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 18.x ]
+    env:
+      FRONTEND_ENVS: ${{secrets.FRONTEND_ENVS}}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install Dependencies
+        run: npm install
+      - name: Crear env file
+        run: |
+          echo ${FRONTEND_ENVS} > .env
+      - name: Run Jest Tests
+        run: npm run test
