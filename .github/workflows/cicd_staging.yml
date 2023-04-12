@@ -11,8 +11,7 @@ jobs:
     strategy:
       matrix:
         node-version: [ 18.x ]
-    env:
-      FRONTEND_ENVS: ${{secrets.FRONTEND_ENVS}}
+
     steps:
       - uses: actions/checkout@v3
 
@@ -28,3 +27,10 @@ jobs:
           echo ${FRONTEND_ENVS} > .env
       - name: Run Jest Tests
         run: npm run test
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
