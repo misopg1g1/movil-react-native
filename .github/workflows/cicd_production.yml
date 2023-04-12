@@ -11,8 +11,7 @@ jobs:
     strategy:
       matrix:
         node-version: [ 18.x ]
-    env:
-      FRONTEND_ENVS: ${{secrets.FRONTEND_ENVS}}
+
     steps:
       - uses: actions/checkout@v3
 
