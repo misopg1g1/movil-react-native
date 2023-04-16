@@ -92,7 +92,8 @@ export default function LoginScreen(props: {
           <View>
             <TouchableOpacity
               style={styles.buttonContainer}
-              onPress={() => login()}>
+              onPress={() => login()}
+              testID="login-button">
               <Text style={styles.buttonText}>
                 {Language.translate(loginContent.login_button)}
               </Text>
