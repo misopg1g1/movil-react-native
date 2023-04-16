@@ -1,7 +1,6 @@
 import {getLocales} from 'react-native-localize';
-import 'dayjs/locale/pl';
 import 'dayjs/locale/en';
-import 'dayjs/locale/de';
+import 'dayjs/locale/es';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
@@ -68,7 +67,7 @@ export class Language {
 
   public static toCurrency(cents: number): string {
     const price = (cents / 100).toFixed(2).toString();
-    return `${price.replace('.', ',')} €`;
+    return `${price} $`;
   }
 
   public static translate(
