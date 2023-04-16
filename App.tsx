@@ -6,6 +6,7 @@ import {
   NavigationContainer,
 } from '@react-navigation/native';
 import MainStack from './src/navigators/main.stack';
+import {AuthProvider} from './src/context/auth.context';
 
 const App = (): JSX.Element => {
   const colorScheme = useColorScheme();
@@ -27,7 +28,9 @@ const App = (): JSX.Element => {
 
   return (
     <NavigationContainer theme={isDarkMode ? BlackTheme : WhiteTheme}>
-      <MainStack />
+      <AuthProvider>
+        <MainStack />
+      </AuthProvider>
     </NavigationContainer>
   );
 };

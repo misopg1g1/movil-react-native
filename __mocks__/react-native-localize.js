@@ -1,11 +1,11 @@
 const getLocales = () => [
   // You can choose any locale you want to test
+  {countryCode: 'MX', languageTag: 'es-MX', languageCode: 'es', isRTL: false},
   {countryCode: 'US', languageTag: 'en-US', languageCode: 'en', isRTL: false},
-  {countryCode: 'FR', languageTag: 'fr-FR', languageCode: 'fr', isRTL: false},
 ];
 
 const findBestAvailableLanguage = () => ({
-  languageTag: 'en-US',
+  languageTag: 'es-MX',
   isRTL: false,
 });
 
@@ -15,8 +15,8 @@ const getNumberFormatSettings = () => ({
 });
 
 const getCalendar = () => 'gregorian';
-const getCountry = () => 'US';
-const getCurrencies = () => ['USD', 'EUR'];
+const getCountry = () => 'MX';
+const getCurrencies = () => ['MXN'];
 const getTemperatureUnit = () => 'celsius';
 const getTimeZone = () => 'America/New_York';
 const uses24HourClock = () => true;

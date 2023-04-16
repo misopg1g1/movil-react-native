@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   Image,
   StyleSheet,
   Text,
@@ -6,23 +7,41 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {ParamListBase} from '@react-navigation/native';
 import {loginContent} from './login.content';
 import {StartStackRouteNames} from '../../routes/startRoutes';
 import {Language} from '../../utils/language.utils';
+import {useAuthContext} from '../../context/auth.context';
 
 export default function LoginScreen(props: {
   navigation: NativeStackNavigationProp<ParamListBase>;
 }) {
-  const login = () => {
-    console.log('here', props);
-    props.navigation.navigate(StartStackRouteNames.ProductsScreen);
+  const [user, setUser] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
+  const {doLoginIn, token} = useAuthContext();
+
+  const login = async () => {
+    setLoading(true);
+    await doLoginIn({user, password});
+    setLoading(false);
   };
+
+  useEffect(() => {
+    if (token) {
+      props.navigation.navigate(StartStackRouteNames.ProductsScreen);
+    }
+  }, [token, props.navigation]);
 
   return (
     <View style={styles.mainContainer}>
+      {loading && (
+        <View style={styles.maskLoading}>
+          <ActivityIndicator shouldRasterizeIOS />
+        </View>
+      )}
       <View style={styles.topContainer}>
         <Text style={styles.mainTitle}>CCP</Text>
         <Text style={styles.secondaryTitle}>CCP V1.0 System</Text>
@@ -51,6 +70,7 @@ export default function LoginScreen(props: {
               textContentType={'username'}
               autoCapitalize={'none'}
               autoCorrect={false}
+              onChangeText={setUser}
             />
             <Text style={styles.loginPromptText}>
               {Language.translate(loginContent.password_propmt)}
@@ -66,6 +86,7 @@ export default function LoginScreen(props: {
               clearButtonMode={'always'}
               autoCapitalize={'none'}
               autoCorrect={false}
+              onChangeText={setPassword}
             />
           </View>
           <View>
@@ -178,5 +199,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
     lineHeight: 22.2,
     color: 'white',
+  },
+  maskLoading: {
+    position: 'absolute',
+    zIndex: 1,
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'white',
+    opacity: 0.5,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
