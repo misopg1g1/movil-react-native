@@ -6,8 +6,8 @@
     "android": "npm run cc && react-native run-android",
     "cc": "rimraf node_modules/.cache/babel-loader/*,",
     "ios": "npm run cc && npx react-native run-ios --simulator=\"iPhone 14\"",
-    "ios:production": "npm run cc && react-native run-ios --configuration=Release",
-    "android:production": "npm run cc && react-native run-ios --variant=release",
+    "ios:production": "npm run cc && react-native run-ios --configuration=Release --simulator=\"iPhone 14\"",
+    "android:production": "npm run cc && react-native run-android --variant=release",
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest --coverage"
