@@ -35,6 +35,7 @@ export default function MainStack(): JSX.Element {
           headerStyle: {
             backgroundColor: '#2F76E5',
           },
+          headerBackVisible: false,
         }}
       />
     </Stack.Navigator>

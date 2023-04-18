@@ -45,13 +45,20 @@ export const AuthProvider = (props: {
   const [token, setToken] = useState<string | undefined>(undefined);
 
   const doLoginIn = async (params: LoginParams) => {
-    const response = await LoginProvider.login(params);
-    if (response.status === 200) {
-      const result: LoginResponseDto = await response.json();
-      setToken(result.access_token);
-    } else {
-      setToken(undefined);
-      Alert.alert(Language.translate(authContent.alert));
+    try {
+      const response = await LoginProvider.login(params);
+      if (response.status === 200) {
+        const result: LoginResponseDto = await response.json();
+        setToken(result.access_token);
+      } else {
+        setToken(undefined);
+        Alert.alert(Language.translate(authContent.alert));
+      }
+    } catch (e) {
+      Alert.alert(
+        Language.translate(authContent.error.title),
+        Language.translate(authContent.error.description),
+      );
     }
   };
   return (
