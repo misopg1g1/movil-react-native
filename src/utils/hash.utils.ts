@@ -22,6 +22,6 @@ export const hashObject = (jsonBody: JsonBody) => {
     return obj;
   };
   const sortedJson = sortDict(cleanJsonBody);
-  const md5Hash = CryptoJS.MD5(sortedJson).toString();
+  const md5Hash = CryptoJS.MD5(JSON.stringify(sortedJson)).toString();
   return {...cleanJsonBody, hash: md5Hash};
 };
