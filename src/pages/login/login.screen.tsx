@@ -84,8 +84,6 @@ export default function LoginScreen(props: {
               textContentType={'password'}
               secureTextEntry={true}
               clearButtonMode={'always'}
-              autoCapitalize={'none'}
-              autoCorrect={false}
               onChangeText={setPassword}
             />
           </View>
