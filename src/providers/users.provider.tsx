@@ -11,7 +11,6 @@ export class LoginProvider {
       user: params.user,
       password: params.password,
     });
-    console.log(objectWithHash);
     return fetch(`${API_URL}session/login`, {
       method: 'POST',
       headers: {

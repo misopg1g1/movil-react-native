@@ -2,6 +2,12 @@ module.exports = {
   presets: ['module:metro-react-native-babel-preset'],
   plugins: [
     [
+      '@babel/plugin-transform-flow-strip-types',
+      {
+        loose: true,
+      },
+    ],
+    [
       '@babel/plugin-proposal-class-properties',
       {
         loose: true,
@@ -29,6 +35,12 @@ module.exports = {
         safe: false,
         allowUndefined: false,
         verbose: false,
+      },
+    ],
+    [
+      'react-native-reanimated/plugin',
+      {
+        relativeSourceLocation: true,
       },
     ],
   ],

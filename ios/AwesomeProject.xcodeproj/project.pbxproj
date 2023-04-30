@@ -16,6 +16,7 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		B35FCA5029BAA46700B26C6F /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = B35FCA4F29BAA46700B26C6F /* AppCenter-Config.plist */; };
 		B3A8724629D87E78000152E6 /* Inter.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B3A8724529D87E78000152E6 /* Inter.ttf */; };
+		B3C9816C29FEBC8900E32C04 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = B3C9816B29FEBC8900E32C04 /* Fonts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		89C6BE57DB24E9ADA2F236DE /* Pods-AwesomeProject-AwesomeProjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeProject-AwesomeProjectTests.release.xcconfig"; path = "Target Support Files/Pods-AwesomeProject-AwesomeProjectTests/Pods-AwesomeProject-AwesomeProjectTests.release.xcconfig"; sourceTree = "<group>"; };
 		B35FCA4F29BAA46700B26C6F /* AppCenter-Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AppCenter-Config.plist"; sourceTree = "<group>"; };
 		B3A8724529D87E78000152E6 /* Inter.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Inter.ttf; path = ../assets/fonts/Inter.ttf; sourceTree = "<group>"; };
+		B3C9816B29FEBC8900E32C04 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = "../node_modules/react-native-vector-icons/Fonts"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -120,6 +122,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				B3C9816B29FEBC8900E32C04 /* Fonts */,
 				B3A8724529D87E78000152E6 /* Inter.ttf */,
 				B35FCA4F29BAA46700B26C6F /* AppCenter-Config.plist */,
 				13B07FAE1A68108700A75B9A /* AwesomeProject */,
@@ -248,6 +251,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3C9816C29FEBC8900E32C04 /* Fonts in Resources */,
 				B3A8724629D87E78000152E6 /* Inter.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,

@@ -2,8 +2,8 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {StartStackRouteNames} from '../routes/startRoutes';
 import {defaultNavigationOptions} from './defaultNavigationOptions';
-import ProductsScreen from '../pages/products/products.screen';
 import LoginScreen from '../pages/login/login.screen';
+import AuthenticatedNavigator from './authenticated.stack';
 
 export const Stack = createNativeStackNavigator();
 
@@ -26,16 +26,9 @@ export default function MainStack(): JSX.Element {
       />
       <Stack.Screen
         name={StartStackRouteNames.ProductsScreen}
-        component={ProductsScreen}
+        component={AuthenticatedNavigator}
         options={{
-          headerTitle: 'Products',
-          headerLargeTitle: true,
-          headerTintColor: 'white',
-          headerTitleStyle: {color: 'white'},
-          headerStyle: {
-            backgroundColor: '#2F76E5',
-          },
-          headerBackVisible: false,
+          headerShown: false,
         }}
       />
     </Stack.Navigator>

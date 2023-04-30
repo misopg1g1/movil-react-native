@@ -3,10 +3,15 @@ import {LoginParams, LoginProvider} from '../providers/users.provider';
 import {Alert} from 'react-native';
 import {Language} from '../utils/language.utils';
 import {authContent} from './auth.content';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {StartStackParamList} from '../routes/startRoutes';
+import {StartStackRouteNames} from '../routes/startRoutes';
 
 export interface IAuthContext {
   doLoginIn: (params: LoginParams) => Promise<void>;
   token: string | undefined;
+  user: UserDto;
+  doLogout: () => void;
 }
 
 interface LoginResponseDto {
@@ -43,6 +48,8 @@ export const AuthProvider = (props: {
   children: React.ReactNode;
 }): JSX.Element => {
   const [token, setToken] = useState<string | undefined>(undefined);
+  const [user, setUser] = useState<UserDto | undefined>(undefined);
+  const navigation = useNavigation<NavigationProp<StartStackParamList>>();
 
   const doLoginIn = async (params: LoginParams) => {
     try {
@@ -50,8 +57,10 @@ export const AuthProvider = (props: {
       if (response.status === 200) {
         const result: LoginResponseDto = await response.json();
         setToken(result.access_token);
+        setUser(result.data);
       } else {
         setToken(undefined);
+        setUser(undefined);
         Alert.alert(Language.translate(authContent.alert));
       }
     } catch (e) {
@@ -61,11 +70,19 @@ export const AuthProvider = (props: {
       );
     }
   };
+
+  const doLogout = () => {
+    setToken(undefined);
+    setUser(undefined);
+    navigation.navigate(StartStackRouteNames.LoginScreen);
+  };
   return (
     <AuthContext.Provider
       value={{
         token,
         doLoginIn,
+        user,
+        doLogout,
       }}>
       {props.children}
     </AuthContext.Provider>
