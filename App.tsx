@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import React from 'react';
 import {useColorScheme} from 'react-native';
 import {
@@ -7,6 +8,8 @@ import {
 } from '@react-navigation/native';
 import MainStack from './src/navigators/main.stack';
 import {AuthProvider} from './src/context/auth.context';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {ProductProvider} from './src/context/product.context';
 
 const App = (): JSX.Element => {
   const colorScheme = useColorScheme();
@@ -27,11 +30,15 @@ const App = (): JSX.Element => {
   };
 
   return (
-    <NavigationContainer theme={isDarkMode ? BlackTheme : WhiteTheme}>
-      <AuthProvider>
-        <MainStack />
-      </AuthProvider>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer theme={isDarkMode ? BlackTheme : WhiteTheme}>
+        <AuthProvider>
+          <ProductProvider>
+            <MainStack />
+          </ProductProvider>
+        </AuthProvider>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 };
 
