@@ -19,7 +19,7 @@ interface LoginResponseDto {
   data: UserDto;
 }
 
-enum Roles {
+export enum Roles {
   ADMIN = 'ADMIN',
 }
 

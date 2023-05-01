@@ -6,6 +6,9 @@
 import {BackHandler, Settings} from 'react-native';
 import React from 'react';
 import App from '../App';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';

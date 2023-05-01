@@ -13,10 +13,13 @@ import {
   AuthContext,
   AuthProvider,
   IAuthContext,
+  Roles,
   useAuthContext,
 } from '../auth.context';
 import {LoginProvider} from '../../providers/users.provider';
 import {Language} from '../../utils/language.utils';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {NavigationContainer} from '@react-navigation/native';
 
 jest.mock('react-native-localize');
 jest.mock('../../utils/language.utils');
@@ -36,6 +39,14 @@ const TestComponent: React.FC = () => {
       />
       <Text testID="token-value">{token || 'undefined'}</Text>
     </>
+  );
+};
+
+const WrappedTestComponent: React.FC = () => {
+  return (
+    <AuthProvider>
+      <TestComponent />
+    </AuthProvider>
   );
 };
 
@@ -72,6 +83,16 @@ describe('useAuthContext', () => {
     const mockContextValue: IAuthContext = {
       token: '',
       doLoginIn: async () => {},
+      doLogout: async () => {},
+      user: {
+        created_at: '',
+        enabled: true,
+        id: 1,
+        role: 'ADMIN' as Roles,
+        updated_at: '',
+        user: '',
+        verified: true,
+      },
     };
 
     const wrapper = ({children}: {children: React.ReactNode}) => (
@@ -91,10 +112,13 @@ describe('useAuthContext', () => {
       json: () => Promise.resolve(loginResponse),
     });
 
+    const Stack = createNativeStackNavigator();
     const {getByTestId} = render(
-      <AuthProvider>
-        <TestComponent />
-      </AuthProvider>,
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="YourComponent" component={WrappedTestComponent} />
+        </Stack.Navigator>
+      </NavigationContainer>,
     );
 
     fireEvent.press(getByTestId('login-button'));
@@ -109,11 +133,13 @@ describe('useAuthContext', () => {
       status: 401,
     });
     (Language.translate as jest.Mock).mockReturnValue('Login failed');
-
+    const Stack = createNativeStackNavigator();
     const {getByTestId} = render(
-      <AuthProvider>
-        <TestComponent />
-      </AuthProvider>,
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="YourComponent" component={WrappedTestComponent} />
+        </Stack.Navigator>
+      </NavigationContainer>,
     );
 
     fireEvent.press(getByTestId('login-button'));
