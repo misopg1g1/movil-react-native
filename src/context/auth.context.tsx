@@ -10,7 +10,7 @@ import {StartStackRouteNames} from '../routes/startRoutes';
 export interface IAuthContext {
   doLoginIn: (params: LoginParams) => Promise<void>;
   token: string | undefined;
-  user: UserDto;
+  user: UserDto | undefined;
   doLogout: () => void;
 }
 

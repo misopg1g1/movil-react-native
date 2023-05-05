@@ -4,6 +4,7 @@ import {StartStackRouteNames} from '../routes/startRoutes';
 import {defaultNavigationOptions} from './defaultNavigationOptions';
 import LoginScreen from '../pages/login/login.screen';
 import AuthenticatedNavigator from './authenticated.stack';
+import CreateVisitScreen from '../pages/create-visit/create-visit.screen';
 
 export const Stack = createNativeStackNavigator();
 
@@ -31,6 +32,17 @@ export default function MainStack(): JSX.Element {
           headerShown: false,
         }}
       />
+      <Stack.Group screenOptions={{presentation: 'modal'}}>
+        <Stack.Screen
+          name="CreateVisit"
+          component={CreateVisitScreen}
+          options={{
+            headerTitle: '',
+            headerShown: true,
+            headerShadowVisible: false,
+          }}
+        />
+      </Stack.Group>
     </Stack.Navigator>
   );
 }
