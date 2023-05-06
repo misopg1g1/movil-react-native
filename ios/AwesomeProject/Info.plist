@@ -3,11 +3,10 @@
 <plist version="1.0">
 	<dict>
 		<key>NSCameraUsageDescription</key>
-		<string>$(PRODUCT_NAME) needs access to your Camera.</string>
+		<string>For taking photos</string>
 
-		<!-- optionally, if you want to record audio: -->
-		<key>NSMicrophoneUsageDescription</key>
-		<string>$(PRODUCT_NAME) needs access to your Microphone.</string>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>For saving photos</string>
 		<key>UIAppFonts</key>
 		<array>
 			<string>Inter-Black.ttf</string>

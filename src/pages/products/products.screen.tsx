@@ -39,8 +39,6 @@ export default function ProductsScreen() {
   const [searchPrompt, setSearchPrompt] = useState<string>('');
   const [refreshing, setRefreshing] = useState<boolean>(false);
 
-  console.log(products);
-
   useEffect(() => {
     !!token && doGetAllProducts(token);
     // eslint-disable-next-line react-hooks/exhaustive-deps

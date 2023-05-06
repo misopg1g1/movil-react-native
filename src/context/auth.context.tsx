@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {LoginParams, LoginProvider} from '../providers/users.provider';
 import {Alert} from 'react-native';
 import {Language} from '../utils/language.utils';
@@ -12,11 +12,37 @@ export interface IAuthContext {
   token: string | undefined;
   user: UserDto | undefined;
   doLogout: () => void;
+  userClients: UserClientsResponseDto[];
 }
 
 interface LoginResponseDto {
   access_token: string;
   data: UserDto;
+}
+
+interface UserClientsResponseDto {
+  address: {
+    address: string;
+    city: string;
+    country: string;
+    id: string;
+    postal_code: string;
+    zone: string;
+  };
+  email: string;
+  financial_alert: boolean;
+  first_name: string;
+  id: string;
+  identification: {
+    id: string;
+    number: string;
+    type: string;
+  };
+  last_name: string;
+  phone: string;
+  registered_name: string;
+  seller_id: string;
+  seller_name: string;
 }
 
 export enum Roles {
@@ -49,6 +75,7 @@ export const AuthProvider = (props: {
 }): JSX.Element => {
   const [token, setToken] = useState<string | undefined>(undefined);
   const [user, setUser] = useState<UserDto | undefined>(undefined);
+  const [userClients, setUserClients] = useState<UserClientsResponseDto[]>([]);
   const navigation = useNavigation<NavigationProp<StartStackParamList>>();
 
   const doLoginIn = async (params: LoginParams) => {
@@ -71,6 +98,18 @@ export const AuthProvider = (props: {
     }
   };
 
+  const getClienUserClients = async (id: string, userToken: string) => {
+    const response = await LoginProvider.getClients(id, userToken);
+    const result: UserClientsResponseDto[] = await response.json();
+    setUserClients(result.filter(client => client.seller_id === id));
+  };
+
+  useEffect(() => {
+    if (token && user) {
+      getClienUserClients(user.id.toString(), token);
+    }
+  }, [token, user]);
+
   const doLogout = () => {
     setToken(undefined);
     setUser(undefined);
@@ -83,6 +122,7 @@ export const AuthProvider = (props: {
         doLoginIn,
         user,
         doLogout,
+        userClients,
       }}>
       {props.children}
     </AuthContext.Provider>

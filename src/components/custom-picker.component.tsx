@@ -1,6 +1,6 @@
-import {Picker, PickerIOS} from '@react-native-picker/picker';
+import {Picker} from '@react-native-picker/picker';
 import {ItemValue} from '@react-native-picker/picker/typings/Picker';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -10,7 +10,6 @@ interface CustomPickerProps {
   items: {label: string; value: string}[];
   selectedValue: string | undefined;
   onValueChange: (value: string) => void;
-  setValidFunc: (isValid: boolean) => void;
 }
 
 const CustomPicker: React.FC<CustomPickerProps> = ({
@@ -19,7 +18,6 @@ const CustomPicker: React.FC<CustomPickerProps> = ({
   items,
   selectedValue,
   onValueChange,
-  setValidFunc,
 }) => {
   const [isError, setIsError] = useState<boolean>(false);
 
@@ -29,11 +27,6 @@ const CustomPicker: React.FC<CustomPickerProps> = ({
     }
     setIsError(value === '');
   };
-
-  useEffect(() => {
-    setValidFunc(!isError);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isError]);
 
   return (
     <View style={styles.container}>
@@ -47,7 +40,8 @@ const CustomPicker: React.FC<CustomPickerProps> = ({
           style={styles.picker}
           selectedValue={selectedValue}
           onValueChange={handleValueChange}
-          numberOfLines={1}>
+          numberOfLines={1}
+          itemStyle={styles.itemStyle}>
           <Picker.Item label="Selecciona una opción" value="" />
           {items.map((item, index) => (
             <Picker.Item key={index} label={item.label} value={item.value} />
@@ -88,6 +82,11 @@ const styles = StyleSheet.create({
   },
   pickerWrapperError: {
     borderColor: 'red',
+  },
+  itemStyle: {
+    fontSize: 14,
+    fontWeight: '500',
+    lineHeight: 19,
   },
 });
 

@@ -3,4 +3,6 @@ export const COLOR_CODES = {
   WHITE: 'white',
   DARK_BLUE: '#003459',
   LIGHT_GREY: '#D9D9D9',
+  GREY_BORDER: '#FFFFFF',
+  STEELGREY: '#A2A2A2',
 };
