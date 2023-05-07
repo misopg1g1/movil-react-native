@@ -15,7 +15,7 @@ import {authStackContent} from './authenticated.content';
 
 const Drawer = createDrawerNavigator();
 
-const MainIcon = () => {
+export const MainIcon = () => {
   const navigationHook = useNavigation();
   return (
     <TouchableOpacity
@@ -23,12 +23,12 @@ const MainIcon = () => {
       onPress={() => {
         navigationHook.dispatch(DrawerActions.toggleDrawer());
       }}>
-      <Icon name="bars" size={15} color="white" />
+      <Icon name="bars" size={15} color="white" testID="drawer-icon" />
     </TouchableOpacity>
   );
 };
 
-const ProfileHeader = () => {
+export const ProfileHeader = () => {
   const navigationHook = useNavigation();
   const {user} = useAuthContext();
   return (
@@ -36,8 +36,9 @@ const ProfileHeader = () => {
       style={styles.profileContainer}
       onPress={() => {
         navigationHook.dispatch(DrawerActions.toggleDrawer());
-      }}>
-      <Text style={styles.nameText}>{user.user}</Text>
+      }}
+      testID="profile-header">
+      <Text style={styles.nameText}>{user?.user}</Text>
       <View style={styles.profileIconContainer}>
         <Icon name="user" size={25} color="white" />
       </View>

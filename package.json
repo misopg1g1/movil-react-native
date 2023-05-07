@@ -10,9 +10,11 @@
     "android:production": "npm run cc && react-native run-android --variant=release",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "test:watch": "jest --coverage --watch"
   },
   "dependencies": {
+    "@react-native-picker/picker": "^2.4.10",
     "@react-navigation/drawer": "^6.6.2",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
@@ -22,7 +24,10 @@
     "dayjs": "^1.11.7",
     "react": "18.2.0",
     "react-native": "0.71.4",
+    "react-native-camera-kit": "^13.0.0",
     "react-native-crypto-js": "^1.0.0",
+    "react-native-date-picker": "^4.2.13",
+    "react-native-fs": "^2.20.0",
     "react-native-gesture-handler": "^2.9.0",
     "react-native-localize": "^2.2.6",
     "react-native-reanimated": "^3.1.0",
@@ -45,6 +50,7 @@
     "@types/node": "^18.15.11",
     "@types/react": "^18.0.24",
     "@types/react-native-crypto-js": "^1.0.0",
+    "@types/react-native-vector-icons": "^6.4.13",
     "@types/react-test-renderer": "^18.0.0",
     "babel-jest": "^29.2.1",
     "babel-loader": "^8.3.0",

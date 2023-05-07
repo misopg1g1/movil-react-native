@@ -24,6 +24,7 @@ export interface Product {
   img_url: string;
   suppliers: string;
   category: {};
+  stock: number;
 }
 
 export interface IProductContext {
@@ -50,7 +51,6 @@ export const ProductProvider = (props: {
   const doGetAllProducts = async (token: string) => {
     try {
       const response = await ProductsProvider.getAllProducts(token);
-      console.log(response);
       if (response.status === 200) {
         const result: Product[] = await response.json();
         setProducts(result);

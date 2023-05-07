@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useColorScheme} from 'react-native';
 import {
   DarkTheme,
@@ -29,6 +29,15 @@ const App = (): JSX.Element => {
     },
   };
 
+/*   const requestPermissions = async () => {
+    await Camera.requestCameraPermission();
+  };
+
+  useEffect(() => {
+    // eslint-disable-next-line no-void
+    void requestPermissions;
+  }, []);
+ */
   return (
     <SafeAreaProvider>
       <NavigationContainer theme={isDarkMode ? BlackTheme : WhiteTheme}>

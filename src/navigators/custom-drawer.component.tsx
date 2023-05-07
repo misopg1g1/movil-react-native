@@ -4,6 +4,7 @@ import {
   DrawerContentComponentProps,
   DrawerContentScrollView,
   DrawerItem,
+  createDrawerNavigator,
 } from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon5 from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -32,7 +33,7 @@ const DrawerCustomItem = (
     descriptorName.startsWith(props.route),
   );
   const labelFromDescriptor =
-    props.descriptors[descriptorKey].options.drawerLabel;
+    props.descriptors[descriptorKey || ''].options.drawerLabel;
 
   return (
     <DrawerItem
@@ -67,7 +68,9 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
           <View style={styles.profileIconContainer}>
             <Icon name="user" size={40} color="white" />
           </View>
-          <Text style={styles.nameText}>{user.user}</Text>
+          <Text testID="user-name" style={styles.nameText}>
+            {user?.user}
+          </Text>
         </View>
       </View>
       <View style={styles.listContainer}>
@@ -98,18 +101,21 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
             size={29}
             color={COLOR_CODES.WHITE}
           />
-          <Text style={styles.labelText}>
+          <Text testID="settings-text" style={styles.labelText}>
             {Language.translate(authStackContent.settings)}
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonRow} onPress={doLogout}>
+        <TouchableOpacity
+          testID="logout-button"
+          style={styles.buttonRow}
+          onPress={doLogout}>
           <Icon5
             style={styles.footerIcon}
             name={'logout'}
             size={26}
             color={COLOR_CODES.WHITE}
           />
-          <Text style={styles.labelText}>
+          <Text testID="logout-text" style={styles.labelText}>
             {Language.translate(authStackContent.logout)}
           </Text>
         </TouchableOpacity>
