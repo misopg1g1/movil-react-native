@@ -49,7 +49,7 @@ export enum Roles {
   ADMIN = 'ADMIN',
 }
 
-interface UserDto {
+export interface UserDto {
   created_at: string;
   enabled: boolean;
   id: number;
