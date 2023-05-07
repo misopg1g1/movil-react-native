@@ -93,6 +93,7 @@ describe('useAuthContext', () => {
         user: '',
         verified: true,
       },
+      userClients: [],
     };
 
     const wrapper = ({children}: {children: React.ReactNode}) => (
