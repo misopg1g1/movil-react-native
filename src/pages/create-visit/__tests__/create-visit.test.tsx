@@ -40,5 +40,4 @@ describe('CreateVisitScreen', () => {
     // Now, the button should be enabled
     expect(createButton.props.disabled).toBe(true);
   });
-
 });
