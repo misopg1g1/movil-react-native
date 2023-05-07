@@ -14,7 +14,7 @@ import {COLOR_CODES} from '../../utils/colors';
 import {productContent} from './products.content';
 import {Language} from '../../utils/language.utils';
 
-const SearchHeader = ({
+export const SearchHeader = ({
   setSearchPrompt,
 }: {
   setSearchPrompt: React.Dispatch<React.SetStateAction<string>>;
