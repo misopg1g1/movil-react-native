@@ -10,7 +10,10 @@ interface Props {
 export const FloatingActionButton = ({onPress}: Props): JSX.Element => {
   const styles = getStyles(COLOR_CODES.DARK_BLUE);
   return (
-    <TouchableOpacity style={styles.root} onPress={onPress}>
+    <TouchableOpacity
+      testID="floating-action-button"
+      style={styles.root}
+      onPress={onPress}>
       <Icon5 name="plus" size={36} color={COLOR_CODES.WHITE} />
     </TouchableOpacity>
   );

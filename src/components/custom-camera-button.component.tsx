@@ -40,10 +40,21 @@ const CustomCameraButton: React.FC<CustomCameraButtonProps> = ({
     closeModal();
   };
 
+  const handleButtonPressed = (event: {image: {uri: string}; type: string}) => {
+    if (event.type === 'capture') {
+      handleCapture(event);
+    } else {
+      closeModal();
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
-      <TouchableOpacity style={styles.cameraButtonWrapper} onPress={openModal}>
+      <TouchableOpacity
+        style={styles.cameraButtonWrapper}
+        onPress={openModal}
+        testID="camera-button">
         {currentImage ? (
           <Image
             resizeMode="cover"
@@ -64,16 +75,13 @@ const CustomCameraButton: React.FC<CustomCameraButtonProps> = ({
         visible={showModal}
         transparent={true}
         animationType="slide"
-        onRequestClose={closeModal}>
+        onRequestClose={closeModal}
+        testID="camera-screen">
         <CameraScreen
           actions={{rightButtonText: 'Done', leftButtonText: 'Cancel'}}
-          onBottomButtonPressed={event => {
-            if (event.type === 'capture') {
-              handleCapture(event);
-            } else {
-              closeModal();
-            }
-          }}
+          cancelButtonTestID="camera-screen-cancel-button"
+          captureButtonTestID="camera-screen-capture-button"
+          onBottomButtonPressed={handleButtonPressed}
           captureButtonImage={require('../../assets/images/camera.png')}
         />
       </Modal>

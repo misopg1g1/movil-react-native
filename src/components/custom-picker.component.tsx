@@ -38,6 +38,7 @@ const CustomPicker: React.FC<CustomPickerProps> = ({
         ]}>
         <Picker
           style={styles.picker}
+          testID="picker"
           selectedValue={selectedValue}
           onValueChange={handleValueChange}
           numberOfLines={1}

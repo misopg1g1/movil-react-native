@@ -10,7 +10,8 @@
     "android:production": "npm run cc && react-native run-android --variant=release",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "test:watch": "jest --coverage --watch"
   },
   "dependencies": {
     "@react-native-picker/picker": "^2.4.10",
