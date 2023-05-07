@@ -1,11 +1,18 @@
 import React, {useEffect, useState, useCallback} from 'react';
-import {Text, View, StyleSheet, TextInput, FlatList, Image} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TextInput,
+  FlatList,
+  Image,
+  RefreshControl,
+} from 'react-native';
 import {useAuthContext} from '../../context/auth.context';
 import {Product, useProductContext} from '../../context/product.context';
 import {COLOR_CODES} from '../../utils/colors';
-import {Language} from '../../utils/language.utils';
-import {RefreshControl} from 'react-native-gesture-handler';
 import {productContent} from './products.content';
+import {Language} from '../../utils/language.utils';
 
 const SearchHeader = ({
   setSearchPrompt,
@@ -33,7 +40,7 @@ const SearchHeader = ({
   );
 };
 
-export default function ProductsScreen() {
+const ProductsScreen = () => {
   const {token} = useAuthContext();
   const {doGetAllProducts, products} = useProductContext();
   const [searchPrompt, setSearchPrompt] = useState<string>('');
@@ -102,7 +109,9 @@ export default function ProductsScreen() {
       />
     </View>
   );
-}
+};
+
+export default ProductsScreen;
 
 const styles = StyleSheet.create({
   root: {
