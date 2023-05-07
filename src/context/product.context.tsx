@@ -24,6 +24,7 @@ export interface Product {
   img_url: string;
   suppliers: string;
   category: {};
+  stock: number;
 }
 
 export interface IProductContext {

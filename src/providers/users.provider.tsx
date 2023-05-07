@@ -19,4 +19,14 @@ export class LoginProvider {
       body: JSON.stringify(objectWithHash),
     });
   };
+
+  public static getClients = (id: string, token: string) => {
+    return fetch(`${API_URL}customers`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  };
 }

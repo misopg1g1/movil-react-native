@@ -37,7 +37,7 @@ const ProfileHeader = () => {
       onPress={() => {
         navigationHook.dispatch(DrawerActions.toggleDrawer());
       }}>
-      <Text style={styles.nameText}>{user.user}</Text>
+      <Text style={styles.nameText}>{user?.user}</Text>
       <View style={styles.profileIconContainer}>
         <Icon name="user" size={25} color="white" />
       </View>

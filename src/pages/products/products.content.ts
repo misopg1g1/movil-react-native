@@ -7,4 +7,8 @@ export const productContent = {
     es: 'Stock: ',
     en: 'Stock: ',
   },
+  header: {
+    es: 'Productos',
+    en: 'Products',
+  },
 };

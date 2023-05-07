@@ -32,7 +32,7 @@ const DrawerCustomItem = (
     descriptorName.startsWith(props.route),
   );
   const labelFromDescriptor =
-    props.descriptors[descriptorKey].options.drawerLabel;
+    props.descriptors[descriptorKey || ''].options.drawerLabel;
 
   return (
     <DrawerItem
@@ -67,7 +67,7 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
           <View style={styles.profileIconContainer}>
             <Icon name="user" size={40} color="white" />
           </View>
-          <Text style={styles.nameText}>{user.user}</Text>
+          <Text style={styles.nameText}>{user?.user}</Text>
         </View>
       </View>
       <View style={styles.listContainer}>

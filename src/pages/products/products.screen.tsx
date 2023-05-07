@@ -44,9 +44,13 @@ export default function ProductsScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
-  const filteredData = products.filter(item =>
-    item.name.toLowerCase().includes(searchPrompt.toLowerCase()),
-  );
+  const filteredData = products
+    .filter(item => {
+      return item.stock && item.stock > 0;
+    })
+    .filter(item =>
+      item.name.toLowerCase().includes(searchPrompt.toLowerCase()),
+    );
 
   const onRefresh = async () => {
     setRefreshing(true);
@@ -69,7 +73,7 @@ export default function ProductsScreen() {
             {Language.toCurrency(item.price)}
           </Text>
           <Text style={styles.stockText}>
-            {Language.translate(productContent.stockPrefix)} 0
+            {`${Language.translate(productContent.stockPrefix)} ${item.stock}`}
           </Text>
         </View>
       </View>
@@ -79,7 +83,16 @@ export default function ProductsScreen() {
   return (
     <View style={styles.root}>
       <FlatList
-        ListHeaderComponent={<SearchHeader setSearchPrompt={setSearchPrompt} />}
+        ListHeaderComponent={
+          <>
+            <SearchHeader setSearchPrompt={setSearchPrompt} />
+            <View style={styles.headerContainer}>
+              <Text style={styles.headerText}>
+                {Language.translate(productContent.header)}
+              </Text>
+            </View>
+          </>
+        }
         data={filteredData}
         renderItem={({item}) => renderProduct(item)}
         keyExtractor={item => item.id}
@@ -127,7 +140,7 @@ const styles = StyleSheet.create({
   },
   priceContainer: {
     display: 'flex',
-    justifyContent: 'space-between',
+    width: 66,
   },
   textName: {
     fontWeight: '500',
@@ -141,4 +154,10 @@ const styles = StyleSheet.create({
     lineHeight: 15,
   },
   stockText: {marginTop: 12},
+  headerContainer: {marginHorizontal: 20, marginBottom: 10},
+  headerText: {
+    fontWeight: '700',
+    fontSize: 20,
+    lineHeight: 24,
+  },
 });
