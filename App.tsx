@@ -10,6 +10,7 @@ import MainStack from './src/navigators/main.stack';
 import {AuthProvider} from './src/context/auth.context';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {ProductProvider} from './src/context/product.context';
+import {VisitProvider} from './src/context/visit.context';
 
 const App = (): JSX.Element => {
   const colorScheme = useColorScheme();
@@ -29,7 +30,7 @@ const App = (): JSX.Element => {
     },
   };
 
-/*   const requestPermissions = async () => {
+  /*   const requestPermissions = async () => {
     await Camera.requestCameraPermission();
   };
 
@@ -43,7 +44,9 @@ const App = (): JSX.Element => {
       <NavigationContainer theme={isDarkMode ? BlackTheme : WhiteTheme}>
         <AuthProvider>
           <ProductProvider>
-            <MainStack />
+            <VisitProvider>
+              <MainStack />
+            </VisitProvider>
           </ProductProvider>
         </AuthProvider>
       </NavigationContainer>

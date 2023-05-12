@@ -20,7 +20,7 @@ interface LoginResponseDto {
   data: UserDto;
 }
 
-interface UserClientsResponseDto {
+export interface UserClientsResponseDto {
   address: {
     address: string;
     city: string;
