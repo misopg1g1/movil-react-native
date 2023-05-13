@@ -1,12 +1,13 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {StartStackRouteNames} from '../routes/startRoutes';
+import {StartStackParamList, StartStackRouteNames} from '../routes/startRoutes';
 import {defaultNavigationOptions} from './defaultNavigationOptions';
 import LoginScreen from '../pages/login/login.screen';
 import AuthenticatedNavigator from './authenticated.stack';
 import CreateVisitScreen from '../pages/create-visit/create-visit.screen';
+import VisitDetailScreen from '../pages/visit-detail/visit-detail.screen';
 
-export const Stack = createNativeStackNavigator();
+export const Stack = createNativeStackNavigator<StartStackParamList>();
 
 export default function MainStack(): JSX.Element {
   return (
@@ -34,8 +35,19 @@ export default function MainStack(): JSX.Element {
       />
       <Stack.Group screenOptions={{presentation: 'modal'}}>
         <Stack.Screen
-          name="CreateVisit"
+          name={StartStackRouteNames.CreateVisit}
           component={CreateVisitScreen}
+          options={{
+            headerTitle: '',
+            headerShown: true,
+            headerShadowVisible: false,
+          }}
+        />
+      </Stack.Group>
+      <Stack.Group screenOptions={{presentation: 'modal'}}>
+        <Stack.Screen
+          name={StartStackRouteNames.VisitDetail}
+          component={VisitDetailScreen}
           options={{
             headerTitle: '',
             headerShown: true,

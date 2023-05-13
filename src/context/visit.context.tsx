@@ -5,6 +5,7 @@ import {authContent} from './auth.content';
 import {
   VisitCreateDto,
   VisitGetDto,
+  VisitUpdateDto,
   VisitsProvider,
 } from '../providers/visits.provider';
 
@@ -17,6 +18,11 @@ export interface Visit {
 export interface IVisitContext {
   doGetVisitsFromSeller: (token: string) => Promise<void>;
   doCreateVisit: (visit: VisitCreateDto, token: string) => Promise<void>;
+  doUpdateVisit: (
+    visit: VisitUpdateDto,
+    id: string,
+    token: string,
+  ) => Promise<void>;
   visits: VisitGetDto[];
 }
 
@@ -70,12 +76,33 @@ export const VisitProvider = (props: {
     }
   };
 
+  const doUpdateVisit = async (
+    visit: VisitUpdateDto,
+    id: string,
+    token: string,
+  ) => {
+    try {
+      const response = await VisitsProvider.updateVisit(visit, id, token);
+      if (response.status === 200) {
+        doGetVisitsFromSeller(token);
+      } else {
+        Alert.alert(Language.translate(authContent.alert));
+      }
+    } catch (e) {
+      Alert.alert(
+        Language.translate(authContent.error.title),
+        Language.translate(authContent.error.description),
+      );
+    }
+  };
+
   return (
     <VisitContext.Provider
       value={{
         visits,
         doGetVisitsFromSeller,
         doCreateVisit,
+        doUpdateVisit,
       }}>
       {props.children}
     </VisitContext.Provider>
