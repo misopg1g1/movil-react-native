@@ -1,5 +1,5 @@
 import {View, Text, StyleSheet} from 'react-native';
-import React, {useEffect, useId, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Language} from '../../utils/language.utils';
 import {createVisitContent} from './create-visit.content';
 import {COLOR_CODES} from '../../utils/colors';
@@ -19,7 +19,6 @@ export default function CreateVisitScreen() {
   const {userClients} = useAuthContext();
   const {doCreateVisit} = useVisitContext();
   const {token} = useAuthContext();
-  const uid = useId();
   const navigation = useNavigation();
   const [formRequest, setFormRequest] = useState({
     client: '',

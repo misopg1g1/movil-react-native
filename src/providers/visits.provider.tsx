@@ -9,6 +9,12 @@ export interface VisitCreateDto {
   img_base64_data: string;
 }
 
+export interface VisitUpdateDto {
+  description: string;
+  img_base64_data?: string;
+  visit_date?: string;
+}
+
 export interface VisitGetDto {
   id: string;
   visit_date: string;
@@ -66,6 +72,22 @@ export class VisitsProvider {
     const objectWithHash = hashObject(visit);
     return fetch(`${API_URL}visits`, {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(objectWithHash),
+    });
+  };
+
+  public static updateVisit = (
+    visit: VisitUpdateDto,
+    id: string,
+    token: string,
+  ) => {
+    const objectWithHash = hashObject(visit);
+    return fetch(`${API_URL}visits/${id}`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,

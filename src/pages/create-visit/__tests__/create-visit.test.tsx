@@ -28,6 +28,7 @@ const renderCreateVisitScreen = () => {
             visits: [],
             doGetVisitsFromSeller: jest.fn(),
             doCreateVisit: jest.fn(),
+            doUpdateVisit: jest.fn(),
           }}>
           <CreateVisitScreen />
         </VisitContext.Provider>

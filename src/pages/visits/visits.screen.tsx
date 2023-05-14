@@ -13,6 +13,7 @@ import {
 } from '../../routes/startRoutes';
 import {useAuthContext} from '../../context/auth.context';
 import {VisitGetDto} from '../../providers/visits.provider';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const SearchHeader = ({
   setSearchPrompt,
@@ -40,7 +41,7 @@ const SearchHeader = ({
   );
 };
 
-export default function ProductsScreen() {
+export default function VisitsScreen() {
   const [searchPrompt, setSearchPrompt] = useState<string>('');
   const navigation = useNavigation<NavigationProp<StartStackParamList>>();
   const {visits, doGetVisitsFromSeller} = useVisitContext();
@@ -59,9 +60,15 @@ export default function ProductsScreen() {
       .includes(searchPrompt.toLowerCase()),
   );
 
+  const navigateToDetail = (item: VisitGetDto) => {
+    navigation.navigate(StartStackRouteNames.VisitDetail, {visit: item});
+  };
+
   const renderProduct = (item: VisitGetDto) => {
     return (
-      <View style={styles.rowContainer}>
+      <TouchableOpacity
+        onPress={() => navigateToDetail(item)}
+        style={styles.rowContainer}>
         <View style={styles.descriptionContainer}>
           <Text style={styles.textName}>{item.id}</Text>
         </View>
@@ -75,7 +82,7 @@ export default function ProductsScreen() {
             {dayjs(item.visit_date).format('DD/MM/YYYY')}
           </Text>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 
