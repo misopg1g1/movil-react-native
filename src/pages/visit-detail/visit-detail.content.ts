@@ -35,4 +35,8 @@ export const visitDetailContent = {
     es: 'Actualizar',
     en: 'Update',
   },
+  createOrder: {
+    es: 'Crear Orden',
+    en: 'Create Order',
+  },
 };

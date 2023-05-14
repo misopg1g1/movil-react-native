@@ -47,6 +47,14 @@ export default function VisitDetailScreen(props: {
     );
     props.navigation.goBack();
   };
+
+  const handleCreateOrder = () => {
+    props.navigation.goBack();
+    props.navigation.navigate(StartStackRouteNames.CreateOrder, {
+      visitId: visit.id,
+    });
+  };
+
   const getImageBase64 = async (path: string) => {
     try {
       const imageData = await RNFS.readFile(path, 'base64');
@@ -135,6 +143,16 @@ export default function VisitDetailScreen(props: {
           {Language.translate(visitDetailContent.updateButton)}
         </Text>
       </TouchableOpacity>
+      {visit.order_id === '' && (
+        <TouchableOpacity
+          style={[styles.buttonContainer]}
+          onPress={handleCreateOrder}
+          testID="create-order-button">
+          <Text style={styles.buttonText}>
+            {Language.translate(visitDetailContent.createOrder)}
+          </Text>
+        </TouchableOpacity>
+      )}
     </ScrollView>
   );
 }

@@ -41,7 +41,7 @@ const SearchHeader = ({
   );
 };
 
-export default function ProductsScreen() {
+export default function VisitsScreen() {
   const [searchPrompt, setSearchPrompt] = useState<string>('');
   const navigation = useNavigation<NavigationProp<StartStackParamList>>();
   const {visits, doGetVisitsFromSeller} = useVisitContext();

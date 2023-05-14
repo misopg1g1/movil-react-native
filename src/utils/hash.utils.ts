@@ -10,16 +10,14 @@ export const hashObject = (jsonBody: JsonBody) => {
   );
 
   const sortDict = (obj: JsonBody): JsonBody | any => {
-    if (typeof obj === 'object' && obj !== null) {
+    if (Array.isArray(obj)) {
+      return obj.map(item => sortDict(item));
+    } else if (typeof obj === 'object' && obj !== null) {
       const sortedObj: JsonBody = {};
       Object.keys(obj)
         .sort()
         .forEach(key => {
-          if (typeof obj[key] === 'object' && obj[key] !== null) {
-            sortedObj[key] = sortDict(obj[key]);
-          } else {
-            sortedObj[key] = obj[key];
-          }
+          sortedObj[key] = sortDict(obj[key]);
         });
       return sortedObj;
     }

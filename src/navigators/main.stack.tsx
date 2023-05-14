@@ -6,6 +6,8 @@ import LoginScreen from '../pages/login/login.screen';
 import AuthenticatedNavigator from './authenticated.stack';
 import CreateVisitScreen from '../pages/create-visit/create-visit.screen';
 import VisitDetailScreen from '../pages/visit-detail/visit-detail.screen';
+import CreateOrderScreen from '../pages/create-order/create-order.screen';
+import OrderDetailScreen from '../pages/order-detail/order-detail.screen';
 
 export const Stack = createNativeStackNavigator<StartStackParamList>();
 
@@ -48,6 +50,31 @@ export default function MainStack(): JSX.Element {
         <Stack.Screen
           name={StartStackRouteNames.VisitDetail}
           component={VisitDetailScreen}
+          options={{
+            headerTitle: '',
+            headerShown: true,
+            headerShadowVisible: false,
+          }}
+        />
+      </Stack.Group>
+      <Stack.Group>
+        <Stack.Screen
+          name={StartStackRouteNames.CreateOrder}
+          component={CreateOrderScreen}
+          options={{
+            headerTitle: '',
+            headerShown: true,
+            headerStyle: {
+              backgroundColor: '#2F76E5',
+            },
+            headerShadowVisible: false,
+          }}
+        />
+      </Stack.Group>
+      <Stack.Group screenOptions={{presentation: 'modal'}}>
+        <Stack.Screen
+          name={StartStackRouteNames.OrderDetail}
+          component={OrderDetailScreen}
           options={{
             headerTitle: '',
             headerShown: true,
