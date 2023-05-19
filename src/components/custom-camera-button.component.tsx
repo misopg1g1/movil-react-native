@@ -15,11 +15,13 @@ interface CustomCameraButtonProps {
   label: string;
   iconName?: string;
   onCapture: (imagePath: string) => void;
+  uri?: string;
 }
 
 const CustomCameraButton: React.FC<CustomCameraButtonProps> = ({
   label,
   onCapture,
+  uri,
 }) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [currentImage, setCurrentImage] = useState<string | undefined>(
@@ -55,10 +57,10 @@ const CustomCameraButton: React.FC<CustomCameraButtonProps> = ({
         style={styles.cameraButtonWrapper}
         onPress={openModal}
         testID="camera-button">
-        {currentImage ? (
+        {currentImage || uri ? (
           <Image
             resizeMode="cover"
-            source={{uri: currentImage}}
+            source={{uri: currentImage ? currentImage : uri}}
             style={styles.preview}
           />
         ) : (

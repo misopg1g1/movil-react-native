@@ -1,9 +1,9 @@
-import React, {useState, useCallback} from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 import {Text, View, StyleSheet, TextInput, FlatList} from 'react-native';
 import {COLOR_CODES} from '../../utils/colors';
 import {Language} from '../../utils/language.utils';
 import {visitsContent} from './visits.content';
-import {Visit} from '../../context/visit.context';
+import {useVisitContext} from '../../context/visit.context';
 import dayjs from 'dayjs';
 import {FloatingActionButton} from '../../components/floatinActionButton.component';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
@@ -11,24 +11,9 @@ import {
   StartStackParamList,
   StartStackRouteNames,
 } from '../../routes/startRoutes';
-
-const data: Visit[] = [
-  {
-    id: '1',
-    cliente: 'Platanitos Col',
-    fecha: new Date(2023, 4, 5).toISOString(),
-  },
-  {
-    id: '2',
-    cliente: 'El man abarrotero',
-    fecha: new Date(2023, 4, 6).toISOString(),
-  },
-  {
-    id: '3',
-    cliente: 'Comercial Suculenta',
-    fecha: new Date(2023, 4, 7).toISOString(),
-  },
-];
+import {useAuthContext} from '../../context/auth.context';
+import {VisitGetDto} from '../../providers/visits.provider';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const SearchHeader = ({
   setSearchPrompt,
@@ -56,31 +41,48 @@ const SearchHeader = ({
   );
 };
 
-export default function ProductsScreen() {
+export default function VisitsScreen() {
   const [searchPrompt, setSearchPrompt] = useState<string>('');
   const navigation = useNavigation<NavigationProp<StartStackParamList>>();
+  const {visits, doGetVisitsFromSeller} = useVisitContext();
+  const {token} = useAuthContext();
 
-  const filteredData = data.filter(item =>
-    item.cliente.toLowerCase().includes(searchPrompt.toLowerCase()),
+  useEffect(() => {
+    if (token) {
+      doGetVisitsFromSeller(token);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const filteredData = visits.filter(item =>
+    item.customer.registered_name
+      .toLowerCase()
+      .includes(searchPrompt.toLowerCase()),
   );
 
-  const renderProduct = (item: Visit) => {
+  const navigateToDetail = (item: VisitGetDto) => {
+    navigation.navigate(StartStackRouteNames.VisitDetail, {visit: item});
+  };
+
+  const renderProduct = (item: VisitGetDto) => {
     return (
-      <View style={styles.rowContainer}>
+      <TouchableOpacity
+        onPress={() => navigateToDetail(item)}
+        style={styles.rowContainer}>
         <View style={styles.descriptionContainer}>
           <Text style={styles.textName}>{item.id}</Text>
         </View>
         <View style={styles.descriptionContainer}>
           <Text style={styles.textName} numberOfLines={2} lineBreakMode="tail">
-            {item.cliente}
+            {item.customer.registered_name}
           </Text>
         </View>
         <View style={styles.descriptionContainer}>
           <Text style={styles.textName}>
-            {dayjs(item.fecha).format('DD/MM/YYYY')}
+            {dayjs(item.visit_date).format('DD/MM/YYYY')}
           </Text>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 

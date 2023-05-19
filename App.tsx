@@ -10,6 +10,9 @@ import MainStack from './src/navigators/main.stack';
 import {AuthProvider} from './src/context/auth.context';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {ProductProvider} from './src/context/product.context';
+import {VisitProvider} from './src/context/visit.context';
+import {hashObject} from './src/utils/hash.utils';
+import {OrderProvider} from './src/context/order.context';
 
 const App = (): JSX.Element => {
   const colorScheme = useColorScheme();
@@ -29,21 +32,16 @@ const App = (): JSX.Element => {
     },
   };
 
-/*   const requestPermissions = async () => {
-    await Camera.requestCameraPermission();
-  };
-
-  useEffect(() => {
-    // eslint-disable-next-line no-void
-    void requestPermissions;
-  }, []);
- */
   return (
     <SafeAreaProvider>
       <NavigationContainer theme={isDarkMode ? BlackTheme : WhiteTheme}>
         <AuthProvider>
           <ProductProvider>
-            <MainStack />
+            <VisitProvider>
+              <OrderProvider>
+                <MainStack />
+              </OrderProvider>
+            </VisitProvider>
           </ProductProvider>
         </AuthProvider>
       </NavigationContainer>

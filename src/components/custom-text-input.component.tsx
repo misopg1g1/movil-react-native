@@ -41,6 +41,7 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
           placeholder={placeholder}
           onChangeText={handleChangeText}
           value={value}
+          multiline={true}
         />
         {iconName && <Icon name={iconName} size={24} style={styles.icon} />}
       </View>

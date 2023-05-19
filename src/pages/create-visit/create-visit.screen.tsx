@@ -10,10 +10,16 @@ import CustomCameraButton from '../../components/custom-camera-button.component'
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import RNFS from 'react-native-fs';
 import {useAuthContext} from '../../context/auth.context';
+import {useVisitContext} from '../../context/visit.context';
+import dayjs from 'dayjs';
+import {useNavigation} from '@react-navigation/native';
 
 export default function CreateVisitScreen() {
   const [validness, setValidness] = useState<boolean>(false);
   const {userClients} = useAuthContext();
+  const {doCreateVisit} = useVisitContext();
+  const {token} = useAuthContext();
+  const navigation = useNavigation();
   const [formRequest, setFormRequest] = useState({
     client: '',
     desciption: '',
@@ -28,6 +34,19 @@ export default function CreateVisitScreen() {
     } catch (e) {
       console.warn(e);
     }
+  };
+
+  const handleCreateVisit = async () => {
+    await doCreateVisit(
+      {
+        customer_id: formRequest.client,
+        description: formRequest.desciption,
+        visit_date: dayjs(formRequest.date).format('YYYY-MM-DD'),
+        img_base64_data: formRequest.img,
+      },
+      token as string,
+    );
+    navigation.goBack();
   };
 
   useEffect(() => {
@@ -91,7 +110,7 @@ export default function CreateVisitScreen() {
               : COLOR_CODES.BLUE,
           },
         ]}
-        onPress={() => console.log('click')}
+        onPress={handleCreateVisit}
         testID="login-button"
         disabled={!validness}>
         <Text style={styles.buttonText}>Crear</Text>
