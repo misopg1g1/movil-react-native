@@ -3,6 +3,10 @@ export const authContent = {
     es: 'Credenciales inválidas, intente de nuevo.',
     en: 'Invalid Credentials, please try again.',
   },
+  alertRole: {
+    es: 'La aplicación unicamente está disponible para usuarios Vendedores',
+    en: 'The application is only available for Sellers',
+  },
   error: {
     title: {
       es: 'Error Login',

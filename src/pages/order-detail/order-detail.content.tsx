@@ -8,8 +8,8 @@ export const orderDetailContent = {
     en: 'Client',
   },
   dateLabel: {
-    es: 'Fecha',
-    en: 'Date',
+    es: 'Fecha de Entrega',
+    en: 'Delivery Date',
   },
   orderLabel: {
     es: 'Orden ID',

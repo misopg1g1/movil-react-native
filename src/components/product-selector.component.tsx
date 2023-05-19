@@ -1,10 +1,9 @@
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, FlatList} from 'react-native';
 import React, {useState} from 'react';
 import {Product, useProductContext} from '../context/product.context';
 import {SearchHeader} from '../pages/products/products.screen';
 import {Language} from '../utils/language.utils';
 import {COLOR_CODES} from '../utils/colors';
-import {FlatList} from 'react-native-gesture-handler';
 import ProductItem from './product-selector/product-item.component';
 
 interface ProductSelectorProps {

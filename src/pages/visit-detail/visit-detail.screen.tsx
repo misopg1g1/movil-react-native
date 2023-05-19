@@ -137,7 +137,7 @@ export default function VisitDetailScreen(props: {
           },
         ]}
         onPress={handleUpdate}
-        testID="login-button"
+        testID="update-button"
         disabled={!validness}>
         <Text style={styles.buttonText}>
           {Language.translate(visitDetailContent.updateButton)}

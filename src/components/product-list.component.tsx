@@ -1,10 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
-import {View, Text, StyleSheet, Image} from 'react-native';
 import React from 'react';
+import {View, Text, StyleSheet, Image, FlatList} from 'react-native';
 import {Product} from '../context/product.context';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {COLOR_CODES} from '../utils/colors';
-import {FlatList} from 'react-native-gesture-handler';
 import {Language} from '../utils/language.utils';
 import {productListContent} from './product-list.content';
 
@@ -50,6 +49,7 @@ export default function ProductList(props: ProductListProps) {
           <Icon
             onPress={() => props.setModalOn && props.setModalOn(true)}
             name={'plus-circle'}
+            testID="plus-circle"
             size={20}
             color={COLOR_CODES.STEELGREY}
           />
