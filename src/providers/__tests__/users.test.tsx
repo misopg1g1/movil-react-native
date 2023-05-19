@@ -4,8 +4,8 @@ import {LoginProvider} from '../users.provider';
 global.fetch = jest.fn();
 
 const token = 'test-token';
-const API_ENDPOINT_C = `https://ccpapi.edgarluna.dev/customers`;
-const API_ENDPOINT_L = `https://ccpapi.edgarluna.dev/session/login`;
+const API_ENDPOINT_C = `https://stagingapi.edgarluna.dev/customers`;
+const API_ENDPOINT_L = `https://stagingapi.edgarluna.dev/session/login`;
 
 describe('UsersProvider', () => {
   beforeEach(() => {

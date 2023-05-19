@@ -4,7 +4,7 @@ import {OrdersProvider} from '../order.provider';
 global.fetch = jest.fn();
 
 const token = 'test-token';
-const API_ENDPOINT = `https://ccpapi.edgarluna.dev/orders`;
+const API_ENDPOINT = `https://stagingapi.edgarluna.dev/orders`;
 
 describe('OrdersProvider', () => {
   beforeEach(() => {

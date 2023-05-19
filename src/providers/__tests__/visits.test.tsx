@@ -9,7 +9,7 @@ import {
 global.fetch = jest.fn();
 
 const token = 'test-token';
-const API_ENDPOINT = `https://ccpapi.edgarluna.dev/visits`;
+const API_ENDPOINT = `https://stagingapi.edgarluna.dev/visits`;
 
 describe('VisitsProvider', () => {
   beforeEach(() => {

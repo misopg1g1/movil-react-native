@@ -3,7 +3,7 @@ import {ProductsProvider} from '../products.provider';
 global.fetch = jest.fn();
 
 const token = 'test-token';
-const API_ENDPOINT = `https://ccpapi.edgarluna.dev/products`;
+const API_ENDPOINT = `https://stagingapi.edgarluna.dev/products`;
 
 describe('ProductsProvider', () => {
   beforeEach(() => {
