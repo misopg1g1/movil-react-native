@@ -56,7 +56,7 @@ export default function CreateOrderScreen(props: {
   };
 
   return (
-    <View style={styles.root}>
+    <View style={styles.root} testID="root-create-order">
       <ProductList
         setModalOn={setShowModal}
         selectedProducts={selectedProducts}

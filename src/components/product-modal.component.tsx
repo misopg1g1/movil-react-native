@@ -14,7 +14,7 @@ interface ProductModalProps {
 export default function ProductModal(props: ProductModalProps) {
   return (
     <View style={styles.modalContainer}>
-      <View style={styles.headerContainer}>
+      <View testID="header-modal" style={styles.headerContainer}>
         <Icon
           onPress={props.close}
           name={'close-circle'}

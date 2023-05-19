@@ -54,6 +54,7 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
               date={date}
               onDateChange={handleDateChange}
               mode={mode}
+              testID="date-picker"
             />
           </View>
         </TouchableOpacity>

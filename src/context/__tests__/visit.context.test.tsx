@@ -26,6 +26,7 @@ jest.mock('../../providers/visits.provider', () => {
       ...originalModule.ProductsProvider,
       getVisitsFromSeller: jest.fn(),
       createVisit: jest.fn(),
+      updateVisit: jest.fn(),
     },
   };
 });
@@ -62,6 +63,58 @@ describe('VisitProvider', () => {
       const {doGetVisitsFromSeller} = useVisitContext();
       React.useEffect(() => {
         doGetVisitsFromSeller('token');
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, []);
+      return null;
+    };
+
+    render(
+      <VisitProvider>
+        <TestComponent />
+      </VisitProvider>,
+    );
+
+    await waitFor(() => {
+      expect(VisitsProvider.getVisitsFromSeller).toHaveBeenCalledWith('token');
+    });
+  });
+
+  it('doCreateVisit makes the expected API call', async () => {
+    (VisitsProvider.createVisit as jest.Mock).mockResolvedValueOnce({
+      status: 201,
+      json: async () => {},
+    });
+
+    const TestComponent = () => {
+      const {doCreateVisit} = useVisitContext();
+      React.useEffect(() => {
+        doCreateVisit({} as VisitCreateDto, 'token');
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, []);
+      return null;
+    };
+
+    render(
+      <VisitProvider>
+        <TestComponent />
+      </VisitProvider>,
+    );
+
+    await waitFor(() => {
+      expect(VisitsProvider.getVisitsFromSeller).toHaveBeenCalledWith('token');
+    });
+  });
+
+  it('doUpdateVisit makes the expected API call', async () => {
+    (VisitsProvider.updateVisit as jest.Mock).mockResolvedValueOnce({
+      status: 200,
+      json: async () => {},
+    });
+
+    const TestComponent = () => {
+      const {doUpdateVisit} = useVisitContext();
+      React.useEffect(() => {
+        doUpdateVisit({} as VisitCreateDto, '1', 'token');
         // eslint-disable-next-line react-hooks/exhaustive-deps
       }, []);
       return null;

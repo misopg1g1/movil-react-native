@@ -47,6 +47,7 @@ export interface UserClientsResponseDto {
 
 export enum Roles {
   ADMIN = 'ADMIN',
+  SELLER = 'SELLER',
 }
 
 export interface UserDto {
@@ -77,14 +78,20 @@ export const AuthProvider = (props: {
   const [user, setUser] = useState<UserDto | undefined>(undefined);
   const [userClients, setUserClients] = useState<UserClientsResponseDto[]>([]);
   const navigation = useNavigation<NavigationProp<StartStackParamList>>();
-
   const doLoginIn = async (params: LoginParams) => {
     try {
       const response = await LoginProvider.login(params);
       if (response.status === 200) {
         const result: LoginResponseDto = await response.json();
-        setToken(result.access_token);
-        setUser(result.data);
+        if (result.data.role !== Roles.SELLER) {
+          Alert.alert(
+            Language.translate(authContent.error.title),
+            Language.translate(authContent.alertRole),
+          );
+        } else {
+          setToken(result.access_token);
+          setUser(result.data);
+        }
       } else {
         setToken(undefined);
         setUser(undefined);

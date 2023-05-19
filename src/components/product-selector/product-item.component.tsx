@@ -49,6 +49,7 @@ export default function ProductItem(props: ProductItemProps) {
       <View style={styles.counterContainer}>
         <Icon
           onPress={handleDecreaseCounter}
+          testID="minus"
           name={'minus'}
           size={26}
           color={COLOR_CODES.STEELGREY}
@@ -56,6 +57,7 @@ export default function ProductItem(props: ProductItemProps) {
         <Text style={styles.textName}>{counter}</Text>
         <Icon
           onPress={handleIncreaseCounter}
+          testID="plus"
           name={'plus'}
           size={26}
           color={COLOR_CODES.STEELGREY}

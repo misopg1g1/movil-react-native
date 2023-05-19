@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import {BackHandler, Button, Settings, Text, View} from 'react-native';
+import {Alert, BackHandler, Button, Settings, Text, View} from 'react-native';
 import React from 'react';
 import {
   fireEvent,
@@ -20,10 +20,14 @@ import {LoginProvider} from '../../providers/users.provider';
 import {Language} from '../../utils/language.utils';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
+import {authContent} from '../auth.content';
 
 jest.mock('react-native-localize');
 jest.mock('../../utils/language.utils');
 jest.mock('../../providers/users.provider');
+jest.mock('react-native/Libraries/Alert/Alert', () => ({
+  alert: jest.fn(),
+}));
 
 const TestComponent: React.FC = () => {
   const {doLoginIn, token} = useAuthContext();
@@ -148,6 +152,34 @@ describe('useAuthContext', () => {
     await waitFor(() => {
       const token = getByTestId('token-value').props.children;
       expect(LoginProvider.login).toHaveBeenCalledTimes(1);
+      expect(token).toEqual('undefined');
+    });
+  });
+
+  test('should show an alert when the use is not a seller', async () => {
+    (LoginProvider.login as jest.Mock).mockResolvedValue({
+      status: 200,
+      json: () => ({
+        data: {
+          role: 'ADMIN',
+        },
+      }),
+    });
+    const Stack = createNativeStackNavigator();
+    const {getByTestId} = render(
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="YourComponent" component={WrappedTestComponent} />
+        </Stack.Navigator>
+      </NavigationContainer>,
+    );
+
+    fireEvent.press(getByTestId('login-button'));
+
+    await waitFor(() => {
+      const token = getByTestId('token-value').props.children;
+      expect(LoginProvider.login).toHaveBeenCalledTimes(1);
+      expect(Alert.alert).toBeCalledTimes(1);
       expect(token).toEqual('undefined');
     });
   });
