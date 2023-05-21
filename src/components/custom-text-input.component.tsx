@@ -37,6 +37,7 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
           isError ? styles.inputWrapperError : null,
         ]}>
         <TextInput
+          testID={`${label.toLowerCase()}-input`}
           style={styles.textInput}
           placeholder={placeholder}
           onChangeText={handleChangeText}

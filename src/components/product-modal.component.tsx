@@ -20,6 +20,7 @@ export default function ProductModal(props: ProductModalProps) {
           name={'close-circle'}
           size={26}
           color={COLOR_CODES.STEELGREY}
+          testID="close-modal"
         />
       </View>
       <ProductSelector

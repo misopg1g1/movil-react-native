@@ -9,6 +9,7 @@ interface ProductItemProps {
   product: Product;
   setSelectedProducts: (products: (Product & {quantity: number})[]) => void;
   selectedProducts: (Product & {quantity: number})[];
+  index?: number;
 }
 export default function ProductItem(props: ProductItemProps) {
   const item = props.product;
@@ -36,6 +37,8 @@ export default function ProductItem(props: ProductItemProps) {
       setCounter(counter - 1);
     }
   };
+
+  console.log(props.index, `plus-item-${props.index}`);
   return (
     <View style={styles.rowContainer}>
       <View style={styles.imageContainer}>
@@ -57,7 +60,7 @@ export default function ProductItem(props: ProductItemProps) {
         <Text style={styles.textName}>{counter}</Text>
         <Icon
           onPress={handleIncreaseCounter}
-          testID="plus"
+          testID={`plus-item-${props.index?.toString()}`}
           name={'plus'}
           size={26}
           color={COLOR_CODES.STEELGREY}

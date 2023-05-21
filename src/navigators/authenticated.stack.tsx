@@ -19,6 +19,7 @@ export const MainIcon = () => {
   const navigationHook = useNavigation();
   return (
     <TouchableOpacity
+      testID="header-drawer-button"
       style={styles.drawerIconContainer}
       onPress={() => {
         navigationHook.dispatch(DrawerActions.toggleDrawer());
