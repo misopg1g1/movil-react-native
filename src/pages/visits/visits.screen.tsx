@@ -54,21 +54,24 @@ export default function VisitsScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const filteredData = visits.filter(item =>
-    item.customer.registered_name
-      .toLowerCase()
-      .includes(searchPrompt.toLowerCase()),
-  );
+  const filteredData = visits
+    .filter(item =>
+      item.customer.registered_name
+        .toLowerCase()
+        .includes(searchPrompt.toLowerCase()),
+    )
+    .reverse();
 
   const navigateToDetail = (item: VisitGetDto) => {
     navigation.navigate(StartStackRouteNames.VisitDetail, {visit: item});
   };
 
-  const renderProduct = (item: VisitGetDto) => {
+  const renderProduct = (item: VisitGetDto, index: number) => {
     return (
       <TouchableOpacity
         onPress={() => navigateToDetail(item)}
-        style={styles.rowContainer}>
+        style={styles.rowContainer}
+        testID={`visit-item-${index}`}>
         <View style={styles.descriptionContainer}>
           <Text style={styles.textName}>{item.id}</Text>
         </View>
@@ -117,7 +120,7 @@ export default function VisitsScreen() {
           </>
         }
         data={filteredData}
-        renderItem={({item}) => renderProduct(item)}
+        renderItem={({item, index}) => renderProduct(item, index)}
         keyExtractor={item => item.id}
       />
       <FloatingActionButton

@@ -36,11 +36,12 @@ describe('ProductItem', () => {
         product={mockProduct}
         setSelectedProducts={setSelectedProducts}
         selectedProducts={[]}
+        index={0}
       />,
     );
 
     // Increase the counter
-    fireEvent.press(getByTestId('plus'));
+    fireEvent.press(getByTestId('plus-item-0'));
     expect(setSelectedProducts).toHaveBeenCalledWith([
       {...mockProduct, quantity: 1},
     ]);
