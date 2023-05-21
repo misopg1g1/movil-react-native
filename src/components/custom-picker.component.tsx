@@ -45,7 +45,12 @@ const CustomPicker: React.FC<CustomPickerProps> = ({
           itemStyle={styles.itemStyle}>
           <Picker.Item label="Selecciona una opción" value="" />
           {items.map((item, index) => (
-            <Picker.Item key={index} label={item.label} value={item.value} />
+            <Picker.Item
+              testID={`${item.label.replace(' ', '-').toLowerCase()}-item`}
+              key={index}
+              label={item.label}
+              value={item.value}
+            />
           ))}
         </Picker>
         {iconName && <Icon name={iconName} size={24} style={styles.icon} />}

@@ -62,9 +62,10 @@ export default function ProductsScreen() {
     navigation.navigate(StartStackRouteNames.OrderDetail, {order: item});
   };
 
-  const renderProduct = (item: GetOrderDTO) => {
+  const renderProduct = (item: GetOrderDTO, index: number) => {
     return (
       <TouchableOpacity
+        testID={`order-item-${index}`}
         onPress={() => navigateToDetail(item)}
         style={styles.rowContainer}>
         <View style={styles.descriptionContainer}>
@@ -85,6 +86,7 @@ export default function ProductsScreen() {
   return (
     <View style={styles.root}>
       <FlatList
+        testID="orders-flatlist"
         ListHeaderComponent={
           <>
             <SearchHeader setSearchPrompt={setSearchPrompt} />
@@ -113,7 +115,7 @@ export default function ProductsScreen() {
           </>
         }
         data={filteredData}
-        renderItem={({item}) => renderProduct(item)}
+        renderItem={({item, index}) => renderProduct(item, index)}
         keyExtractor={item => item.id}
       />
     </View>

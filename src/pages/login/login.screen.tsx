@@ -71,6 +71,7 @@ export default function LoginScreen(props: {
               autoCapitalize={'none'}
               autoCorrect={false}
               onChangeText={setUser}
+              testID="username-textinput"
             />
             <Text style={styles.loginPromptText}>
               {Language.translate(loginContent.password_propmt)}
@@ -85,6 +86,7 @@ export default function LoginScreen(props: {
               secureTextEntry={true}
               clearButtonMode={'always'}
               onChangeText={setPassword}
+              testID="password-textinput"
             />
           </View>
           <View>

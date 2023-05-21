@@ -25,12 +25,13 @@ export default function ProductSelector(props: ProductSelectorProps) {
         item.sku.toLowerCase().includes(searchPrompt.toLowerCase()),
     );
 
-  const renderProduct = (item: Product) => {
+  const renderProduct = (item: Product, index: number) => {
     return (
       <ProductItem
         product={item}
         setSelectedProducts={props.setSelectedProducts}
         selectedProducts={props.selectedProducts}
+        index={index}
       />
     );
   };
@@ -50,7 +51,7 @@ export default function ProductSelector(props: ProductSelectorProps) {
         }
         ListFooterComponent={<View style={styles.footer} />}
         data={filteredData}
-        renderItem={({item}) => renderProduct(item)}
+        renderItem={({item, index}) => renderProduct(item, index)}
         keyExtractor={item => item.id}
       />
     </View>

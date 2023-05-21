@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {
   View,
   Text,
@@ -27,6 +27,7 @@ const CustomCameraButton: React.FC<CustomCameraButtonProps> = ({
   const [currentImage, setCurrentImage] = useState<string | undefined>(
     undefined,
   );
+  const cameraRef = useRef<CameraScreen | null>(null);
 
   const openModal = () => {
     setShowModal(true);
@@ -85,6 +86,18 @@ const CustomCameraButton: React.FC<CustomCameraButtonProps> = ({
           captureButtonTestID="camera-screen-capture-button"
           onBottomButtonPressed={handleButtonPressed}
           captureButtonImage={require('../../assets/images/camera.png')}
+          ref={ref => {
+            cameraRef.current = ref;
+          }}
+        />
+        <TouchableOpacity
+          style={styles.testButton}
+          onPress={() => {
+            if (cameraRef.current?.onCaptureImagePressed) {
+              cameraRef.current?.onCaptureImagePressed();
+            }
+          }}
+          testID="capture-button"
         />
       </Modal>
     </View>
@@ -144,6 +157,12 @@ const styles = StyleSheet.create({
     fontSize: 9,
     lineHeight: 13.5,
     color: COLOR_CODES.STEELGREY,
+  },
+  testButton: {
+    height: 1,
+    width: 1,
+    position: 'absolute',
+    zIndex: 100,
   },
 });
 
