@@ -37,8 +37,6 @@ export default function ProductItem(props: ProductItemProps) {
       setCounter(counter - 1);
     }
   };
-
-  console.log(props.index, `plus-item-${props.index}`);
   return (
     <View style={styles.rowContainer}>
       <View style={styles.imageContainer}>
