@@ -47,8 +47,6 @@ export default function VisitsScreen() {
   const {visits, doGetVisitsFromSeller} = useVisitContext();
   const {token} = useAuthContext();
 
-  console.log(visits);
-
   useEffect(() => {
     if (token) {
       doGetVisitsFromSeller(token);
