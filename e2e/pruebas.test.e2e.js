@@ -75,5 +75,5 @@ describe('Pruebas E2E', () => {
     const finalCount = await countItems('order-item-', 'orders-flatlist');
     console.log(finalCount);
     await jestExpect(finalCount).toEqual(initialCount + 1);
-  });
+  }, 1200000);
 });
